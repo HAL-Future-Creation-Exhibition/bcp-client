@@ -4,12 +4,8 @@ import NotFound from "@/pages/NotFoundPage.vue";
 
 // Admin pages
 import Dashboard from "@/pages/Dashboard.vue";
-import Profile from "@/pages/Profile.vue";
-import Notifications from "@/pages/Notifications.vue";
-import Icons from "@/pages/Icons.vue";
-import Maps from "@/pages/Maps.vue";
-import Typography from "@/pages/Typography.vue";
-import TableList from "@/pages/TableList.vue";
+import Storage from "@/pages/Storage.vue";
+import Server from "@/pages/Server.vue";
 
 const routes = [
   {
@@ -19,51 +15,22 @@ const routes = [
     children: [
       {
         path: "dashboard",
-        name: "dashboard",
+        name: "ダッシュボード",
         component: Dashboard
+      },
+      {
+        path: "storage",
+        name: "ストレージ",
+        component: Storage
+      },
+      {
+        path: "server",
+        name: "サーバー",
+        component: Server
       }
-      // {
-      //   path: "profile",
-      //   name: "profile",
-      //   component: Profile
-      // },
-      // {
-      //   path: "notifications",
-      //   name: "notifications",
-      //   component: Notifications
-      // },
-      // {
-      //   path: "icons",
-      //   name: "icons",
-      //   component: Icons
-      // },
-      // {
-      //   path: "maps",
-      //   name: "maps",
-      //   component: Maps
-      // },
-      // {
-      //   path: "typography",
-      //   name: "typography",
-      //   component: Typography
-      // },
-      // {
-      //   path: "table-list",
-      //   name: "table-list",
-      //   component: TableList
-      // }
     ]
   },
   { path: "*", component: NotFound },
 ];
-
-/**
- * Asynchronously load view (Webpack Lazy loading compatible)
- * The specified component must be inside the Views folder
- * @param  {string} name  the filename (basename) of the view to load.
-function view(name) {
-  var res= require('../components/Dashboard/Views/' + name + '.vue');
-  return res;
-};**/
 
 export default routes;

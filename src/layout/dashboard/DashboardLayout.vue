@@ -3,8 +3,8 @@
     <side-bar>
       <template slot="links">
         <sidebar-link to="/dashboard" name="dashboard" icon="tim-icons icon-chart-pie-36"/>
-        <sidebar-link to="/table-list" name="storage" icon="tim-icons icon-puzzle-10"/>
-        <sidebar-link to="/table-list" name="server" icon="tim-icons icon-puzzle-10"/>
+        <sidebar-link to="/storage" name="storage" icon="tim-icons icon-single-copy-04"/>
+        <sidebar-link to="/server" name="server" icon="tim-icons icon-tv-2"/>
       </template>
     </side-bar>
     <div class="main-panel">
