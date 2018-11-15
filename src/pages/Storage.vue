@@ -1,8 +1,16 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <base-button>ファイルアップロード</base-button>
-      <base-button>フォルダアップロード</base-button>
+
+      <label for="file-upload-input">
+        <span class="btn">ファイルアップロード</span>
+        <input type="file" style="display: none;" id="file-upload-input" multiple @change="uploadFiles">
+      </label>
+
+      <label for="dir-upload-input">
+        <span class="btn">フォルダアップロード</span>
+        <input type="file" style="display: none;"  id="dir-upload-input" webkitdirectory @change="uploadDir">
+      </label>
       <card>
         <div class="table-responsive">
           <base-table
@@ -17,6 +25,7 @@
 </template>
 <script>
 import { BaseTable, BaseButton } from "@/components";
+import http from "@/api/http";
 const tableColumns = ["Name", "Owner", "UpdatedAt"];
 const tableData = [
   {
@@ -73,6 +82,14 @@ export default {
         columns: [...tableColumns],
         data: [...tableData]
       }
+    }
+  },
+  methods: {
+    uploadFiles(e) {
+      http.uploadFile(e.target.files);
+    },
+    uploadDir(e) {
+      http.uploadDir(e.target.files);
     }
   }
 }
