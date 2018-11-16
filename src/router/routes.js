@@ -6,6 +6,7 @@ import NotFound from "@/pages/NotFoundPage.vue";
 import Dashboard from "@/pages/Dashboard.vue";
 import Storage from "@/pages/Storage.vue";
 import Server from "@/pages/Server.vue";
+import TP from "@/pages/Typography.vue";
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
         path: "server",
         name: "サーバー",
         component: Server
+      },
+      {
+        path: "tp",
+        name: "タイポグラフィ",
+        component: TP
       }
     ]
   },
