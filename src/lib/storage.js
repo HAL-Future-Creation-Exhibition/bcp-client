@@ -10,7 +10,7 @@ const storage = new class {
 
   getServiceStatus(service_name) {
     const status = JSON.parse(localStorage.getItem("misoten-service-status"));
-    return service_name in status ? status[service_name] : false;
+    return status ? service_name in status ? status[service_name] : false : false;
   }
 
   serviceEnable(service_name) {
