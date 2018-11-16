@@ -10,27 +10,6 @@
             <div id="js-editor"></div>
           </div>
         </div>
-        <!-- <ul class="nav nav-pills nav-pills-rose">
-          <li class="nav-item"><a class="nav-link" href="#pill1" data-toggle="tab">Profile</a></li>
-          <li class="nav-item"><a class="nav-link active" href="#pill2" data-toggle="tab">Settings</a></li>
-          <li class="nav-item"><a class="nav-link" href="#pill3" data-toggle="tab">Options</a></li>
-        </ul>
-        <div class="tab-content tab-space">
-            <div class="tab-pane active" id="pill1">
-              Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits.
-              <br><br>
-              Dramatically visualize customer directed convergence without revolutionary ROI.
-            </div>
-            <div class="tab-pane" id="pill2">
-              Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
-              <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
-            </div>
-            <div class="tab-pane" id="pill3">
-                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
-                <br><br>Dynamically innovate resource-leveling customer service for state of the art customer service.
-            </div>
-        </div> -->
-
       </card>
     </div>
   </div>
@@ -39,9 +18,18 @@
 export default {
   mounted() {
     this.generateEditors();
+    document.addEventListener("keydown", this.save_key_bind, false);
+  },
+  beforeDestroy() {
+    document.removeEventListener("keydown", this.save_key_bind, false);
   },
   data() {
     return {
+      editors: {
+        html: null,
+        css: null,
+        js: null
+      },
       code: {
         html: `<!DOCTYPE html>
 <html lang="ja">
@@ -66,14 +54,28 @@ export default {
       html_editor.setTheme("ace/theme/monokai");
       html_editor.getSession().setMode("ace/mode/html");
       html_editor.setValue(this.code.html, -1);
+      this.editors.html = html_editor;
       const css_editor = ace.edit("css-editor");
       css_editor.setTheme("ace/theme/monokai");
       css_editor.getSession().setMode("ace/mode/css");
       css_editor.setValue(this.code.css, -1);
+      this.editors.css = css_editor;
       const js_editor = ace.edit("js-editor");
       js_editor.setTheme("ace/theme/monokai");
       js_editor.getSession().setMode("ace/mode/javascript");
       js_editor.setValue(this.code.js, -1);
+      this.editors.js = js_editor;
+    },
+    save_key_bind() {
+      document.addEventListener("keydown", (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.which === 83) {
+          e.preventDefault();
+          console.log(this.editors.html.getValue())
+          console.log(this.editors.css.getValue())
+          console.log(this.editors.js.getValue())
+          return false;
+        }
+      }, false)
     }
   }
 }
