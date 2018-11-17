@@ -3,7 +3,9 @@
     <div class="col-12">
       <card>
         <div class="server-view-container">
-          <div class="view"></div>
+          <div class="view">
+            <iframe src="http://example.com/" frameborder="0"></iframe>
+          </div>
           <div class="editor-container">
             <div id="html-editor"></div>
             <div id="css-editor"></div>
@@ -87,6 +89,10 @@ export default {
     height: 270px;
     background-color: #fff;
     margin-bottom: 20px;
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
   }
   .editor-container {
     display: flex;

@@ -11,6 +11,15 @@
         <input type="file" style="display: none;"  id="dir-upload-input" webkitdirectory @change="uploadDir">
       </label>
 
+      <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#top">TOP</a></li>
+          <li class="breadcrumb-item"><a href="#">Library</a></li>
+          <li class="breadcrumb-item"><a href="#">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+      </nav>
+
       <div class="files-wrapper">
         <card class="text-center">
           <div class="card-body">
@@ -83,6 +92,160 @@
           </div>
         </card>
       </div>
+
+      <table class="table" style="margin-top: 10px;">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>UpdatedAt</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">1</td>
+                <td>Andrew Mike</td>
+                <td>Develop</td>
+                <td>2013</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">2</td>
+                <td>John Doe</td>
+                <td>Design</td>
+                <td>2012</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>Alex Mike</td>
+                <td>Design</td>
+                <td>2010</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>Alex Mike</td>
+                <td>Design</td>
+                <td>2010</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>Alex Mike</td>
+                <td>Design</td>
+                <td>2010</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>Alex Mike</td>
+                <td>Design</td>
+                <td>2010</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>Alex Mike</td>
+                <td>Design</td>
+                <td>2010</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>Alex Mike</td>
+                <td>Design</td>
+                <td>2010</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>Alex Mike</td>
+                <td>Design</td>
+                <td>2010</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>Alex Mike</td>
+                <td>Design</td>
+                <td>2010</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                    <i class="material-icons">download</i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     </div>
   </div>
@@ -182,6 +345,11 @@ export default {
     .card-text {
       font-size: 12px;
     }
+  }
+}
+.table {
+  .btn-info {
+    margin-right: 10px!important;
   }
 }
 </style>
