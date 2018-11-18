@@ -13,82 +13,21 @@
 
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#top">TOP</a></li>
-          <li class="breadcrumb-item"><a href="#">Library</a></li>
-          <li class="breadcrumb-item"><a href="#">Library</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Library</li>
+          <li class="breadcrumb-item" style="cursor: pointer;" @click="navigation(-1)">
+            <span>TOP</span>
+          </li>
+          <li class="breadcrumb-item" v-for="(b, index) in breadcrumbs" style="cursor: pointer;" @click="navigation(index)" :key="`breadcrumbs-index-${index}`">
+            <span>{{b}}</span>
+          </li>
         </ol>
       </nav>
 
       <div class="files-wrapper">
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
+        <card class="text-center dir-card" v-for="(dir, index) in dirs" :key="`dir-index-${index}`">
+          <div class="card-body" @click="dig(dir.name)">
+            <h4 class="card-title">{{ dir.name }}</h4>
             <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
-          </div>
-        </card>
-        <card class="text-center">
-          <div class="card-body">
-            <h4 class="card-title">hoge</h4>
-            <p class="card-text">管理者: konojunya</p>
-            <p class="card-text">更新日: 2018/01/19</p>
+            <p class="card-text">更新日: 2018 / 01 / 19</p>
           </div>
         </card>
       </div>
@@ -104,146 +43,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="text-center">1</td>
-                <td>Andrew Mike</td>
-                <td>Develop</td>
-                <td>2013</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">2</td>
-                <td>John Doe</td>
-                <td>Design</td>
-                <td>2012</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Alex Mike</td>
-                <td>Design</td>
-                <td>2010</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Alex Mike</td>
-                <td>Design</td>
-                <td>2010</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Alex Mike</td>
-                <td>Design</td>
-                <td>2010</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Alex Mike</td>
-                <td>Design</td>
-                <td>2010</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Alex Mike</td>
-                <td>Design</td>
-                <td>2010</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Alex Mike</td>
-                <td>Design</td>
-                <td>2010</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Alex Mike</td>
-                <td>Design</td>
-                <td>2010</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Alex Mike</td>
-                <td>Design</td>
-                <td>2010</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                    <i class="material-icons">download</i>
-                  </button>
-                  <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                    <i class="material-icons">delete</i>
-                  </button>
-                </td>
-            </tr>
+          <tr v-for="(file, index) in files" :key="`file-index-${index}`">
+            <td class="text-center">{{index + 1}}</td>
+            <td>{{file.name}}</td>
+            <td>konojunya</td>
+            <td>2018 / 11 / 14</td>
+            <td class="td-actions text-right">
+              <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                <i class="material-icons" @click="download(file)">download</i>
+              </button>
+              <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                <i class="material-icons" @click="fileDelete(file)">delete</i>
+              </button>
+            </td>
+          </tr>
         </tbody>
     </table>
 
@@ -251,80 +64,58 @@
   </div>
 </template>
 <script>
+import client from "../../api/http";
 import { BaseTable, BaseButton } from "@/components";
-import http from "@/api/http";
 const tableColumns = ["Name", "Owner", "UpdatedAt"];
-const tableData = [
-  {
-    id: 1,
-    name: "Dakota Rice",
-    owner: "konojunya",
-    updatedat: "2018/11/13",
-    isDir: true
-  },
-  {
-    id: 2,
-    name: "Minerva Hooper",
-    owner: "konojunya",
-    updatedat: "2018/11/13",
-    isDir: true
-  },
-  {
-    id: 3,
-    name: "Sage Rodriguez",
-    owner: "konojunya",
-    updatedat: "2018/11/13",
-    isDir: false
-  },
-  {
-    id: 4,
-    name: "Philip Chaney",
-    owner: "konojunya",
-    updatedat: "2018/11/13",
-    isDir: false
-  },
-  {
-    id: 5,
-    name: "Doris Greene",
-    owner: "konojunya",
-    updatedat: "2018/11/13",
-    isDir: false
-  },
-  {
-    id: 6,
-    name: 'Mason Porter',
-    owner: "konojunya",
-    updatedat: "2018/11/13",
-    isDir: false
-  },
-  {
-    id: 7,
-    name: 'Jon Porter',
-    owner: "konojunya",
-    updatedat: "2018/11/13",
-    isDir: false
-  }
-];
 export default {
+  mounted() {
+    this.getStorage();
+  },
   components: {
     BaseTable,
     BaseButton
   },
   data() {
     return {
-      breadcrumbs: [],
-      table: {
-        columns: [...tableColumns],
-        data: [...tableData]
-      }
+      files: [],
+      dirs: [],
+      breadcrumbs: []
     }
   },
   methods: {
+    fileDelete(file) {
+      client.fileDelete("/", file.name);
+    },
     uploadFiles(e) {
-      http.uploadFile(e.target.files);
+      client.uploadFile(e.target.files);
     },
     uploadDir(e) {
-      http.uploadDir(e.target.files);
+      client.uploadDir(e.target.files);
+    },
+    async download(file) {
+      const target = file.current_path.split("/").filter(r => !!r);
+      target.push(file.name);
+      await client.download(target);
+    },
+    async navigation(index) {
+      if(index === -1) {
+        this.breadcrumbs = [];
+        this.getStorage();
+      } else {
+        this.getStorage(this.breadcrumbs[index]);
+      }
+    },
+    async dig(name) {
+      const current_dir = this.breadcrumbs.join("/");
+      this.breadcrumbs.push(name);
+      await this.getStorage(`${current_dir}/${name}`);
+    },
+    async getStorage(name) {
+      const res = await client.getStorage(name);
+      const raws = res.data.raws;
+      this.breadcrumbs = raws[0].current_path.split("/").filter(r => !!r);
+      this.files = raws.filter(raw => !raw.isDir);
+      this.dirs = raws.filter(raw => raw.isDir);
     }
   }
 }
@@ -351,5 +142,8 @@ export default {
   .btn-info {
     margin-right: 10px!important;
   }
+}
+.dir-card {
+  cursor: pointer;
 }
 </style>

@@ -5,8 +5,40 @@ class Client {
 
   constructor() {
     this.http = axios.create({
-      baseURL: "http://localhost:3001"
+      baseURL: "http://localhost:8080"
     })
+  }
+
+  fileDelete(path, name) {
+    return this.http.delete(`/delete/file?path=${path}`, {
+      name
+    });
+  }
+
+  async download(paths) {
+    const res = await this.http.post("/download", {
+      paths
+    });
+    console.log(res.data);
+
+    // const blob = res.data;
+    // const a = document.createElement("a");
+    // const blobURL = window.URL.createObjectURL(new Blob([blob], {
+    //   type: blob.type
+    // }));
+    // a.style = "display: none";
+    // document.body.appendChild(a);
+    // a.href = blobURL;
+    // a.download = "hoge.txt";
+    // a.click();
+  }
+
+  getStorage(path) {
+    if(path) {
+      return this.http.get(`/file?path=${path}`);
+    } else {
+      return this.http.get(`/file`);
+    }
   }
 
   uploadFile(files) {
@@ -14,7 +46,7 @@ class Client {
     for(const file of files) {
       fd.append("file", file);
     }
-    return this.http.post("/hh", fd);
+    return this.http.post("/upload/file", fd);
   }
 
   async uploadDir(files) {
