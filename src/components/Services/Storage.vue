@@ -6,10 +6,12 @@
         <input type="file" style="display: none;" id="file-upload-input" multiple @change="uploadFiles">
       </label>
 
-      <label for="dir-upload-input">
+      <label for="dir-upload-input" style="margin-right: 10px;">
         <span class="btn">フォルダアップロード</span>
         <input type="file" style="display: none;"  id="dir-upload-input" webkitdirectory @change="uploadDir">
       </label>
+
+      <span class="btn" @click="createDir">フォルダ作成</span>
 
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
@@ -25,6 +27,7 @@
       <div class="files-wrapper">
         <card class="text-center dir-card" v-for="(dir, index) in dirs" :key="`dir-index-${index}`">
           <div class="card-body" @click="dig(dir.name)">
+            <!-- grid-45 -->
             <h4 class="card-title">{{ dir.name }}</h4>
             <p class="card-text">管理者: konojunya</p>
             <p class="card-text">更新日: 2018 / 01 / 19</p>
@@ -83,19 +86,31 @@ export default {
     }
   },
   methods: {
-    fileDelete(file) {
-      client.fileDelete("/", file.name);
+    async createDir() {
+      const dirName = prompt("フォルダ名を指定してください", "");
+      if(!dirName) {
+        return;
+      }
+      const current_dir = this.breadcrumbs.join("/");
+      await client.createDir(current_dir, dirName);
+      await this.reloadStorageView();
     },
-    uploadFiles(e) {
-      client.uploadFile(e.target.files);
+    async fileDelete(file) {
+      await client.fileDelete(file.current_path, file.name);
+      await this.reloadStorageView();
     },
-    uploadDir(e) {
-      client.uploadDir(e.target.files);
+    async uploadFiles(e) {
+      const current_dir = this.breadcrumbs.join("/");
+      await client.uploadFile(current_dir, e.target.files);
+      await this.reloadStorageView();
+    },
+    async uploadDir(e) {
+      const current_dir = this.breadcrumbs.join("/");
+      await client.uploadDir(current_dir, e.target.files);
+      await this.reloadStorageView();
     },
     async download(file) {
-      const target = file.current_path.split("/").filter(r => !!r);
-      target.push(file.name);
-      await client.download(target);
+      await client.download(file.current_path, file.name);
     },
     async navigation(index) {
       if(index === -1) {
@@ -113,9 +128,18 @@ export default {
     async getStorage(name) {
       const res = await client.getStorage(name);
       const raws = res.data.raws;
-      this.breadcrumbs = raws[0].current_path.split("/").filter(r => !!r);
-      this.files = raws.filter(raw => !raw.isDir);
-      this.dirs = raws.filter(raw => raw.isDir);
+      if(raws) {
+        this.breadcrumbs = raws[0].current_path.split("/").filter(r => !!r);
+        this.files = raws.filter(raw => !raw.isDir);
+        this.dirs = raws.filter(raw => raw.isDir);
+      } else {
+        this.files = [];
+        this.dirs = [];
+      }
+    },
+    async reloadStorageView() {
+      const current_dir = this.breadcrumbs.join("/");
+      await this.getStorage(current_dir);
     }
   }
 }

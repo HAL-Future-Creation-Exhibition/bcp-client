@@ -8,6 +8,12 @@ class Client {
     })
   }
 
+  createDir(path, name) {
+    return this.http.post(`/create/dir?path=${path}`, {
+      name
+    });
+  }
+
   webUpdate({html, css, js}) {
     return this.http.post("/web/upload", {
       html,
@@ -18,26 +24,28 @@ class Client {
 
   fileDelete(path, name) {
     return this.http.delete(`/delete/file?path=${path}`, {
-      name
+      data: {
+        name
+      }
     });
   }
 
-  async download(paths) {
-    const res = await this.http.post("/download", {
-      paths
+  async download(path, file_name) {
+    const res = await this.http.post(`/download?path=${path}`, {
+      paths: [file_name]
+    }, {
+      responseType: "arraybuffer"
     });
-    console.log(res.data);
 
-    // const blob = res.data;
-    // const a = document.createElement("a");
-    // const blobURL = window.URL.createObjectURL(new Blob([blob], {
-    //   type: blob.type
-    // }));
-    // a.style = "display: none";
-    // document.body.appendChild(a);
-    // a.href = blobURL;
-    // a.download = "hoge.txt";
-    // a.click();
+    const blob = res.data;
+    const a = document.createElement("a");
+    const blobURL = window.URL.createObjectURL(new Blob([blob], { type : 'application/octet-stream' }));
+    a.style = "display: none";
+    document.body.appendChild(a);
+    a.href = blobURL;
+    a.download = file_name;
+    a.click();
+    a.remove();
   }
 
   getStorage(path) {
@@ -48,12 +56,12 @@ class Client {
     }
   }
 
-  uploadFile(files) {
+  uploadFile(current_dir, files) {
     const fd = new FormData();
     for(const file of files) {
       fd.append("file", file);
     }
-    return this.http.post("/upload/file", fd);
+    return this.http.post(`/upload/file?path=${current_dir}`, fd);
   }
 
   async uploadDir(current_dir ,files) {
@@ -63,7 +71,7 @@ class Client {
       fd.append("files", file);
       fd.append("filePath", file.webkitRelativePath);
     }
-    return this.http.post("/upload/dir", fd);
+    return this.http.post(`/upload/dir?path=${current_dir}`, fd);
   }
 
 }
