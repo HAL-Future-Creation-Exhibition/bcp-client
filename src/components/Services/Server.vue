@@ -4,7 +4,7 @@
       <card>
         <div class="server-view-container">
           <div class="view">
-            <iframe src="http://example.com/" frameborder="0"></iframe>
+            <iframe id="iframe" src="http://127.0.0.1/" frameborder="0"></iframe>
           </div>
           <div class="editor-container">
             <div id="html-editor"></div>
@@ -17,37 +17,25 @@
   </div>
 </template>
 <script>
+import http from "../../api/http";
+import webSrcDB from "../../lib/webserver";
 export default {
   mounted() {
     this.generateEditors();
-    document.addEventListener("keydown", this.save_key_bind, false);
+    document.addEventListener("keydown", this.save, false);
   },
   beforeDestroy() {
-    document.removeEventListener("keydown", this.save_key_bind, false);
+    document.removeEventListener("keydown", this.save, false);
   },
   data() {
+    const src = webSrcDB.getSrc();
     return {
       editors: {
         html: null,
         css: null,
         js: null
       },
-      code: {
-        html: `<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <h1>Hello World</h1>
-  </body>
-</html>`,
-        css: `body {
-  width: 100%;
-  height: 100%;
-}`,
-        js: `console.log("Hello World");`
-      }
+      code: src
     }
   },
   methods: {
@@ -68,16 +56,17 @@ export default {
       js_editor.setValue(this.code.js, -1);
       this.editors.js = js_editor;
     },
-    save_key_bind() {
-      document.addEventListener("keydown", (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.which === 83) {
-          e.preventDefault();
-          console.log(this.editors.html.getValue())
-          console.log(this.editors.css.getValue())
-          console.log(this.editors.js.getValue())
-          return false;
-        }
-      }, false)
+    async save(e) {
+      if ((e.ctrlKey || e.metaKey) && e.which === 83) {
+        e.preventDefault();
+        const html = this.editors.html.getValue();
+        const css = this.editors.css.getValue();
+        const js = this.editors.js.getValue();
+        await http.webUpdate({ html, css, js });
+        webSrcDB.setSrc({ html, css, js })
+        document.getElementById("iframe").contentWindow.location.replace("http://127.0.0.1");
+        return false;
+      }
     }
   }
 }

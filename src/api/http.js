@@ -1,5 +1,4 @@
 import axios from "axios";
-import JSZip from "jszip";
 
 class Client {
 
@@ -7,6 +6,14 @@ class Client {
     this.http = axios.create({
       baseURL: "http://localhost:8080"
     })
+  }
+
+  webUpdate({html, css, js}) {
+    return this.http.post("/web/upload", {
+      html,
+      css,
+      js
+    });
   }
 
   fileDelete(path, name) {
@@ -49,16 +56,14 @@ class Client {
     return this.http.post("/upload/file", fd);
   }
 
-  async uploadDir(files) {
-    const zip = new JSZip();
+  async uploadDir(current_dir ,files) {
     const fd = new FormData();
+    fd.append("path", current_dir);
     for(const file of files) {
-      zip.file(file.name, file);
+      fd.append("files", file);
       fd.append("filePath", file.webkitRelativePath);
     }
-    const content = await zip.generateAsync({ type: "blob" });
-    fd.append("files", content);
-    return this.http.post("/hoge", fd);
+    return this.http.post("/upload/dir", fd);
   }
 
 }
