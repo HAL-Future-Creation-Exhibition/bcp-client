@@ -8,6 +8,14 @@ class Client {
     })
   }
 
+  deleteDir(path, name) {
+    return this.http.delete(`/delete/dir?path=${path}`, {
+      data: {
+        name
+      }
+    })
+  }
+
   createDir(path, name) {
     return this.http.post(`/create/dir?path=${path}`, {
       name
@@ -30,8 +38,8 @@ class Client {
     });
   }
 
-  async download(path, file_name) {
-    const res = await this.http.post(`/download?path=${path}`, {
+  async downloadFile(path, file_name) {
+    const res = await this.http.post(`/download/file?path=${path}`, {
       paths: [file_name]
     }, {
       responseType: "arraybuffer"
@@ -44,6 +52,24 @@ class Client {
     document.body.appendChild(a);
     a.href = blobURL;
     a.download = file_name;
+    a.click();
+    a.remove();
+  }
+
+  async downloadDir(path, file_name) {
+    const res = await this.http.post(`/download/dir?path=${path}`, {
+      paths: [file_name]
+    }, {
+      responseType: "arraybuffer"
+    });
+
+    const blob = res.data;
+    const a = document.createElement("a");
+    const blobURL = window.URL.createObjectURL(new Blob([blob], { type : 'application/octet-stream' }));
+    a.style = "display: none";
+    document.body.appendChild(a);
+    a.href = blobURL;
+    a.download = file_name + ".zip";
     a.click();
     a.remove();
   }
