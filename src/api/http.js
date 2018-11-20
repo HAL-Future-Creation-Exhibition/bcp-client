@@ -56,10 +56,8 @@ class Client {
     a.remove();
   }
 
-  async downloadDir(path, file_name) {
-    const res = await this.http.post(`/download/dir?path=${path}`, {
-      paths: [file_name]
-    }, {
+  async downloadDir(path, dirName) {
+    const res = await this.http.post(`/download/dir?path=${path}`, { dirName }, {
       responseType: "arraybuffer"
     });
 
@@ -69,7 +67,7 @@ class Client {
     a.style = "display: none";
     document.body.appendChild(a);
     a.href = blobURL;
-    a.download = file_name + ".zip";
+    a.download = dirName + ".zip";
     a.click();
     a.remove();
   }
